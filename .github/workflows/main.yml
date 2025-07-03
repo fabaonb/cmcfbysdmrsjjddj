@@ -25,8 +25,7 @@ jobs:
       git config --global user.name "github-actions[bot]"
       git config --global user.email "github-actions[bot]@users.noreply.github.com"
    - name: 下载原文件
-     run: curl -sSL -o sourcefile.js
-      https://raw.githubusercontent.com/cmliu/edgetunnel/refs/heads/main/_worker.js
+     run: curl -fL -o sourcefile.js https://raw.githubusercontent.com/cmliu/edgetunnel/refs/heads/main/_worker.js
    - name: 混淆文件
      run: |
       javascript-obfuscator sourcefile.js --output _worker.js \
@@ -39,5 +38,5 @@ jobs:
    - name: 提交
      run: |
       git add _worker.js
-      git commit --allow-empty-message -m "" || true
+      git commit --allow-empty-message -m "[skip ci]" || true
       git push
